@@ -14,8 +14,8 @@ INSERT INTO products (name, content, packing, category, quantity, price, expirat
 ('ZEKCLAV-DS', 'Amoxycillin, Pot. Clavulanate 28.5 mg', '30 ml syrup bottle (with sterile water for mixing)', 'Antibiotic', 0, 0.00, NULL),
 ('GLIMCUZ-M GP 1', 'Glimepiride 1 mg, Metformin 500 mg Prolonged Release', '10 x 10 tablets (Alu-Alu packing)', 'Anti-Diabetic', 0, 0.00, NULL),
 ('GLIMCUZ-M GP 2', 'Glimepiride 2 mg, Metformin 500 mg Prolonged Release', '10 x 10 tablets (Alu-Alu packing)', 'Anti-Diabetic', 0, 0.00, NULL),
-('ZEKMOL-650 Tablets', 'Paracetamol 650 mg', '10 x 10\'s', 'Analgesic and Antipyretic Tablets', 0, 0.00, NULL),
-('ZIFLOZIN Tablets', 'Dapagliflozin 10 mg', '10 x 10\'s', 'Anti-Diabetic Tablets', 0, 0.00, NULL);
+('ZEKMOL-650 Tablets', 'Paracetamol 650 mg', '10 x 10''s', 'Analgesic and Antipyretic Tablets', 0, 0.00, NULL),
+('ZIFLOZIN Tablets', 'Dapagliflozin 10 mg', '10 x 10''s', 'Anti-Diabetic Tablets', 0, 0.00, NULL);
 
 INSERT INTO users (username, password) VALUES
 ('admin', '$2y$10$25PSEjYnmFbV9PveLuOwqu5NN7qthaDLTLsCTaArtPrZn3sKLBHQu');
