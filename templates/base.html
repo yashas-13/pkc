@@ -1,14 +1,17 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Pharma Inventory{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>{% block title %}Inventory{% endblock %}</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    {% if session.get('username') %}
-    <p>Logged in as {{ session['username'] }} - <a href="{{ url_for('logout') }}">Logout</a></p>
-    {% endif %}
-    {% block content %}{% endblock %}
+<nav>
+    <a href="/">Home</a>
+    <a href="/inventory">Inventory</a>
+    <a href="/logout">Logout</a>
+</nav>
+<hr>
+{% block content %}{% endblock %}
 </body>
 </html>
