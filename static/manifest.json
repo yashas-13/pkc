@@ -1,0 +1,9 @@
+{
+  "name": "Pharma Inventory",
+  "short_name": "Inventory",
+  "start_url": "/mobile",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#317EFB",
+  "icons": []
+}
