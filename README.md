@@ -22,7 +22,8 @@ This project provides a lightweight inventory management system for pharmaceutic
    ```bash
    python app.py
    ```
-4. Visit `http://localhost:5000/login` to sign in (default admin/admin123).
+4. Visit `http://localhost:5000/login` to sign in (default credentials are
+   `admin` / `admin123`).
 5. Access the mobile interface at `http://localhost:5000/mobile`.
 
 The database is automatically created on first run. You can reset it anytime by visiting `/init`.
