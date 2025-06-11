@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<h1>Pharma Inventory</h1>
+<ul>
+    <li><a href="{{ url_for('inventory') }}">Manage Inventory</a></li>
+    <li><a href="{{ url_for('mobile') }}">Mobile Interface</a></li>
+</ul>
+{% endblock %}
