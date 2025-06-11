@@ -1,4 +1,5 @@
-const API = 'api/products.php';
+// Base URL for the Flask REST API
+const API = '/api/products';
 
 function loadProducts() {
     fetch(API)
@@ -24,14 +25,14 @@ function renderProducts(data) {
 }
 
 function editProduct(id) {
-    fetch(`${API}?id=${id}`)
+    fetch(`${API}/${id}`)
         .then(r => r.json())
         .then(fillForm);
 }
 
 function deleteProduct(id) {
     if (!confirm('Delete this product?')) return;
-    fetch(`${API}?id=${id}`, { method: 'DELETE' })
+    fetch(`${API}/${id}`, { method: 'DELETE' })
         .then(loadProducts);
 }
 
@@ -72,7 +73,7 @@ document.getElementById('product-form').addEventListener('submit', function(e) {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(data)
     };
-    const url = id ? `${API}?id=${id}` : API;
+    const url = id ? `${API}/${id}` : API;
     fetch(url, options).then(() => {
         resetForm();
         loadProducts();
