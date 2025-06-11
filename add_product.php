@@ -1,5 +1,9 @@
 <?php
 require 'config.php';
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'];
     $content = $_POST['content']; // Added from x93hgc-codex/create-inventory-management-software-for-pharma-manufacturer
