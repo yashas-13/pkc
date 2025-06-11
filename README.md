@@ -5,14 +5,18 @@ This project provides a basic PHP-based inventory management system for pharmace
 ## Features
 
 - Add, edit, and delete products
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 - Track product quantity, price, expiration date, composition, packing, and category
 - Simple web interface using PHP and MySQL
 - REST API for mobile and other integrations
+
+
 
 ## Getting Started
 
 1. Create a MySQL database (e.g., `inventory`).
 2. Import `db.sql` to create the required tables.
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 3. (Optional) Import `sample_data.sql` to populate products with example entries.
 4. Update the database settings in `config.php`.
 5. Upload all files to your Hostinger PHP hosting account.
@@ -31,6 +35,7 @@ All product operations are also exposed through a REST API located at `api/produ
 
 Responses are JSON encoded.
 
+
 ## Files
 
 - `config.php` - Database connection setup
@@ -41,8 +46,10 @@ Responses are JSON encoded.
 - `edit_product.php` - Update existing products
 - `delete_product.php` - Delete a product
 - `style.css` - Basic styling
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 - `sample_data.sql` - Example products for testing
 - `api/products.php` - REST endpoints
 - `mobile.html`/`mobile.js` - Simple mobile client
+
 
 This is a minimal example and can be extended to meet specific business needs.
