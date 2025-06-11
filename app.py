@@ -11,10 +11,27 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PASSWORD = 'admin123'
 
 
+def _init_db(db):
+    """Create database tables from schema.sql."""
+    with open(os.path.join(app.root_path, 'schema.sql'), 'r') as f:
+        db.executescript(f.read())
+    db.commit()
+
+
 def get_db():
+    """Return a database connection, initializing if needed."""
     if 'db' not in g:
+        need_init = not os.path.exists(app.config['DATABASE'])
         g.db = sqlite3.connect(app.config['DATABASE'])
         g.db.row_factory = sqlite3.Row
+        if need_init:
+            _init_db(g.db)
+        else:
+            cur = g.db.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='products'"
+            )
+            if not cur.fetchone():
+                _init_db(g.db)
     return g.db
 
 
@@ -26,10 +43,8 @@ def close_db(exception=None):
 
 
 def init_db():
-    db = get_db()
-    with open(os.path.join(app.root_path, 'schema.sql'), 'r') as f:
-        db.executescript(f.read())
-    db.commit()
+    """Public helper to reset the database."""
+    _init_db(get_db())
 
 
 @app.route('/init')

@@ -16,17 +16,16 @@ This project provides a lightweight inventory management system for pharmaceutic
    ```bash
    pip install -r requirements.txt
    ```
-2. Initialize the SQLite database:
-   ```bash
-   python app.py /init
-   ```
-3. (Optional) Import `sample_data.sql` using the SQLite shell.
-4. Start the application:
+ codex/remove-php-files-and-migrate-to-python
+2. (Optional) import `sample_data.sql` using the SQLite shell.
+3. Start the application:
    ```bash
    python app.py
    ```
-5. Visit `http://localhost:5000/login` to sign in (default admin/admin123).
-6. Access the mobile interface at `http://localhost:5000/mobile`.
+4. Visit `http://localhost:5000/login` to sign in (default admin/admin123).
+5. Access the mobile interface at `http://localhost:5000/mobile`.
+
+The database is automatically created on first run. You can reset it anytime by visiting `/init`.
 
 ## API
 
