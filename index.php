@@ -16,6 +16,8 @@ if (!isset($_SESSION['user_id'])) {
     <ul>
         <li><a href="inventory.php">View Inventory</a></li>
         <li><a href="add_product.php">Add Product</a></li>
+        <li><a href="stock_in.php">Record Incoming Stock</a></li>
+        <li><a href="stock_out.php">Record Outgoing Stock</a></li>
     </ul>
 </body>
 </html>
