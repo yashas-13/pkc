@@ -1,5 +1,12 @@
 <?php
 require 'config.php';
+
+// Ensure session is started, if not already handled in config.php
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Redirect to login page if user is not authenticated
 if (!isset($_SESSION['user_id'])) {
     header('Location: login.php');
     exit;

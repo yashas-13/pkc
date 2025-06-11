@@ -5,28 +5,35 @@ This project provides a basic PHP-based inventory management system for pharmace
 ## Features
 
 - Add, edit, and delete products
-
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 - Track product quantity, price, expiration date, composition, packing, and category
-
 - Simple web interface using PHP and MySQL
-- Basic authentication system
+- REST API for mobile and other integrations
+
+
 
 ## Getting Started
 
 1. Create a MySQL database (e.g., `inventory`).
 2. Import `db.sql` to create the required tables.
-
-
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 3. (Optional) Import `sample_data.sql` to populate products with example entries.
-4. Set the following environment variables for database access before running the app:
-   - `DB_HOST` - Database host
-   - `DB_NAME` - Database name
-   - `DB_USER` - Database username
-   - `DB_PASS` - Database password
-
+4. Update the database settings in `config.php`.
 5. Upload all files to your Hostinger PHP hosting account.
-6. Visit `login.php` in your browser and log in with the credentials from the sample data.
+6. Visit `index.php` in your browser to begin managing inventory.
+7. (Optional) Use `mobile.html` for a simple mobile-friendly interface.
 
+## API
+
+All product operations are also exposed through a REST API located at `api/products.php`.
+
+- `GET /api/products.php` - list products
+- `GET /api/products.php?id=ID` - retrieve a single product
+- `POST /api/products.php` - add a product (JSON body)
+- `PUT /api/products.php?id=ID` - update a product (JSON body)
+- `DELETE /api/products.php?id=ID` - remove a product
+
+Responses are JSON encoded.
 
 
 ## Files
@@ -39,10 +46,10 @@ This project provides a basic PHP-based inventory management system for pharmace
 - `edit_product.php` - Update existing products
 - `delete_product.php` - Delete a product
 - `style.css` - Basic styling
-- `login.php` - User login page
-- `logout.php` - End a session
-
+ gsamsq-codex/create-inventory-management-software-for-pharma-manufacturer
 - `sample_data.sql` - Example products for testing
+- `api/products.php` - REST endpoints
+- `mobile.html`/`mobile.js` - Simple mobile client
 
 
 This is a minimal example and can be extended to meet specific business needs.

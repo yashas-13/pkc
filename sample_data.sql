@@ -19,4 +19,3 @@ INSERT INTO products (name, content, packing, category, quantity, price, expirat
 
 INSERT INTO users (username, password) VALUES
 ('admin', '$2y$10$25PSEjYnmFbV9PveLuOwqu5NN7qthaDLTLsCTaArtPrZn3sKLBHQu');
-

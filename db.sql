@@ -27,4 +27,3 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users (username, password) VALUES
 ('admin', '$2y$10$25PSEjYnmFbV9PveLuOwqu5NN7qthaDLTLsCTaArtPrZn3sKLBHQu');
-
