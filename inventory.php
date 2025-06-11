@@ -56,7 +56,9 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
         <td><?php echo htmlspecialchars($product['expiration_date']); ?></td>
         <td>
             <a href="edit_product.php?id=<?php echo $product['id']; ?>">Edit</a> |
-            <a href="delete_product.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Delete this product?');">Delete</a>
+            <a href="delete_product.php?id=<?php echo $product['id']; ?>" onclick="return confirm('Delete this product?');">Delete</a> |
+            <a href="stock_in.php?product_id=<?php echo $product['id']; ?>">Add Stock</a> |
+            <a href="stock_out.php?product_id=<?php echo $product['id']; ?>">Remove Stock</a>
         </td>
     </tr>
     <?php endforeach; ?>
