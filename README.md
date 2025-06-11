@@ -16,7 +16,11 @@ This project provides a basic PHP-based inventory management system for pharmace
 2. Import `db.sql` to create the required tables.
 
 3. (Optional) Import `sample_data.sql` to populate products with example entries.
-4. Update the database settings in `config.php`.
+4. Set the following environment variables for database access before running the app:
+   - `DB_HOST` - Database host
+   - `DB_NAME` - Database name
+   - `DB_USER` - Database username
+   - `DB_PASS` - Database password
 5. Upload all files to your Hostinger PHP hosting account.
 6. Visit `index.php` in your browser to begin managing inventory.
 
