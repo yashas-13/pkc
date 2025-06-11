@@ -3,17 +3,14 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Inventory Mobile</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='mobile.css') }}">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <meta name="theme-color" content="#317EFB">
-    <style>
-        body { font-size: 16px; }
-        .product { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-        button { margin-left: 5px; }
-    </style>
 </head>
 <body>
-    <h1>Inventory</h1>
+    <header>
+        <h1>Inventory</h1>
+    </header>
     <div id="list"></div>
 
     <h2 id="form-title">Add Product</h2>
@@ -29,6 +26,7 @@
         <button type="submit">Save</button>
         <button type="button" id="cancel">Cancel</button>
     </form>
+    <button id="show-form">+</button>
     <script src="{{ url_for('static', filename='mobile.js') }}"></script>
     <script>
         if ('serviceWorker' in navigator) {

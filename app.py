@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
 from flask import g
+import csv
+import io
 import sqlite3
 import os
 
@@ -7,14 +9,17 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'change-this-key'
 app.config['DATABASE'] = os.path.join(app.root_path, 'inventory.db')
 
-ADMIN_USERNAME = 'admin'
-ADMIN_PASSWORD = 'admin123'
+from passlib.hash import bcrypt
 
 
 def _init_db(db):
-    """Create database tables from schema.sql."""
+    """Create database tables and load sample data."""
     with open(os.path.join(app.root_path, 'schema.sql'), 'r') as f:
         db.executescript(f.read())
+    sample_path = os.path.join(app.root_path, 'sample_data.sql')
+    if os.path.exists(sample_path):
+        with open(sample_path, 'r') as sf:
+            db.executescript(sf.read())
     db.commit()
 
 
@@ -71,11 +76,13 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+        db = get_db()
+        cur = db.execute('SELECT password FROM users WHERE username=?', (username,))
+        row = cur.fetchone()
+        if row and bcrypt.verify(password, row['password']):
             session['username'] = username
             return redirect(url_for('inventory'))
-        else:
-            error = 'Invalid credentials'
+        error = 'Invalid credentials'
     return render_template('login.html', error=error)
 
 
@@ -225,6 +232,22 @@ def api_product(pid):
         db.execute("DELETE FROM products WHERE id=?", (pid,))
         db.commit()
         return jsonify({'deleted': True})
+
+
+@app.route('/export')
+@login_required
+def export_csv():
+    """Download all products as a CSV file."""
+    db = get_db()
+    cur = db.execute('SELECT * FROM products')
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([d[0] for d in cur.description])
+    for row in cur.fetchall():
+        writer.writerow(row)
+    resp = Response(output.getvalue(), mimetype='text/csv')
+    resp.headers['Content-Disposition'] = 'attachment; filename=products.csv'
+    return resp
 
 
 if __name__ == '__main__':

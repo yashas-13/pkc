@@ -1,6 +1,17 @@
 // Base URL for the Flask REST API
 const API = '/api/products';
 
+function showForm() {
+    document.getElementById('product-form').style.display = 'block';
+    document.getElementById('show-form').style.display = 'none';
+    window.scrollTo(0, document.body.scrollHeight);
+}
+
+function hideForm() {
+    document.getElementById('product-form').style.display = 'none';
+    document.getElementById('show-form').style.display = 'block';
+}
+
 function loadProducts() {
     fetch(API)
         .then(r => r.json())
@@ -27,7 +38,10 @@ function renderProducts(data) {
 function editProduct(id) {
     fetch(`${API}/${id}`)
         .then(r => r.json())
-        .then(fillForm);
+        .then(p => {
+            fillForm(p);
+            showForm();
+        });
 }
 
 function deleteProduct(id) {
@@ -52,7 +66,13 @@ function resetForm() {
     document.getElementById('form-title').textContent = 'Add Product';
     document.getElementById('product-form').reset();
     document.getElementById('prod-id').value = '';
+    hideForm();
 }
+
+document.getElementById('show-form').addEventListener('click', () => {
+    resetForm();
+    showForm();
+});
 
 document.getElementById('cancel').addEventListener('click', resetForm);
 
@@ -81,3 +101,4 @@ document.getElementById('product-form').addEventListener('submit', function(e) {
 });
 
 loadProducts();
+hideForm();
