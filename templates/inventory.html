@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %}Inventory{% endblock %}
+{% block content %}
+<h1>Inventory</h1>
+<form method="get" style="margin-bottom:10px;">
+    <input type="text" name="search" placeholder="Search" value="{{ search }}">
+    <input type="submit" value="Search">
+    <a href="{{ url_for('inventory') }}">Clear</a>
+</form>
+<p><a href="{{ url_for('add') }}">Add Product</a> | <a href="{{ url_for('index') }}">Home</a></p>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Content</th>
+        <th>Packing</th>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Expiration</th>
+        <th>Actions</th>
+    </tr>
+    {% for p in products %}
+    <tr>
+        <td>{{ p.id }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.content|replace('\n','<br>')|safe }}</td>
+        <td>{{ p.packing }}</td>
+        <td>{{ p.category }}</td>
+        <td>{{ p.quantity }}</td>
+        <td>{{ p.price }}</td>
+        <td>{{ p.expiration_date }}</td>
+        <td>
+            <a href="{{ url_for('edit', pid=p.id) }}">Edit</a> |
+            <a href="{{ url_for('delete', pid=p.id) }}" onclick="return confirm('Delete this product?');">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
