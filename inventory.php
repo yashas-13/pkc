@@ -1,5 +1,9 @@
 <?php
 require 'config.php';
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
 
 // Initialize search variable and prepare statement based on search query
 $search = $_GET['search'] ?? '';

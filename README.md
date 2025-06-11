@@ -9,11 +9,13 @@ This project provides a basic PHP-based inventory management system for pharmace
 - Track product quantity, price, expiration date, composition, packing, and category
 
 - Simple web interface using PHP and MySQL
+- Basic authentication system
 
 ## Getting Started
 
 1. Create a MySQL database (e.g., `inventory`).
 2. Import `db.sql` to create the required tables.
+
 
 3. (Optional) Import `sample_data.sql` to populate products with example entries.
 4. Set the following environment variables for database access before running the app:
@@ -21,8 +23,9 @@ This project provides a basic PHP-based inventory management system for pharmace
    - `DB_NAME` - Database name
    - `DB_USER` - Database username
    - `DB_PASS` - Database password
+
 5. Upload all files to your Hostinger PHP hosting account.
-6. Visit `index.php` in your browser to begin managing inventory.
+6. Visit `login.php` in your browser and log in with the credentials from the sample data.
 
 
 
@@ -36,6 +39,8 @@ This project provides a basic PHP-based inventory management system for pharmace
 - `edit_product.php` - Update existing products
 - `delete_product.php` - Delete a product
 - `style.css` - Basic styling
+- `login.php` - User login page
+- `logout.php` - End a session
 
 - `sample_data.sql` - Example products for testing
 
