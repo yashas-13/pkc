@@ -16,6 +16,7 @@ This project provides a lightweight inventory management system for pharmaceutic
    ```bash
    pip install -r requirements.txt
    ```
+ codex/remove-php-files-and-migrate-to-python
 2. (Optional) import `sample_data.sql` using the SQLite shell.
 3. Start the application:
    ```bash
