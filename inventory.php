@@ -1,5 +1,7 @@
 <?php
 require 'config.php';
+
+// Initialize search variable and prepare statement based on search query
 $search = $_GET['search'] ?? '';
 if ($search !== '') {
     $stmt = $pdo->prepare('SELECT * FROM products WHERE name LIKE ? OR category LIKE ?');
@@ -17,12 +19,15 @@ $products = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
 <h1>Inventory</h1>
+
 <form method="get" style="margin-bottom: 10px;">
     <input type="text" name="search" placeholder="Search..." value="<?php echo htmlspecialchars($search); ?>">
     <input type="submit" value="Search">
     <a href="inventory.php">Clear</a>
 </form>
+
 <p><a href="add_product.php">Add Product</a> | <a href="index.php">Home</a></p>
+
 <table>
     <tr>
         <th>ID</th>
