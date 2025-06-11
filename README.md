@@ -8,6 +8,7 @@ This project provides a lightweight inventory management system for pharmaceutic
 - Track quantity, price, expiration date, composition, packing and category
 - Web interface secured by a simple username/password login
 - REST API for integrations
+- Export products to CSV via `/export`
 - Mobile interface implemented as a PWA
 
 ## Getting Started

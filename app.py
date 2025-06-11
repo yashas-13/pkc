@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
 from flask import g
+import csv
+import io
 import sqlite3
 import os
 
@@ -230,6 +232,22 @@ def api_product(pid):
         db.execute("DELETE FROM products WHERE id=?", (pid,))
         db.commit()
         return jsonify({'deleted': True})
+
+
+@app.route('/export')
+@login_required
+def export_csv():
+    """Download all products as a CSV file."""
+    db = get_db()
+    cur = db.execute('SELECT * FROM products')
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([d[0] for d in cur.description])
+    for row in cur.fetchall():
+        writer.writerow(row)
+    resp = Response(output.getvalue(), mimetype='text/csv')
+    resp.headers['Content-Disposition'] = 'attachment; filename=products.csv'
+    return resp
 
 
 if __name__ == '__main__':
