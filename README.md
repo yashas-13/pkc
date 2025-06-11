@@ -8,6 +8,7 @@ This project provides a lightweight inventory management system for pharmaceutic
 - Track quantity, price, expiration date, composition, packing and category
 - Web interface secured by a simple username/password login
 - REST API for integrations
+- Export products to CSV via `/export`
 - Mobile interface implemented as a PWA
 
 ## Getting Started
@@ -22,8 +23,16 @@ This project provides a lightweight inventory management system for pharmaceutic
    ```bash
    python app.py
    ```
-4. Visit `http://localhost:5000/login` to sign in (default admin/admin123).
-5. Access the mobile interface at `http://localhost:5000/mobile`.
+4. Visit `http://localhost:5000/login` to sign in. Sample accounts:
+   - Manufacturer admin: `admin` / `admin123`
+   - Clearing agent: `cfa` / `cfa123`
+   - Super stockists: `stockist1`..`stockist20` with passwords `stock1`..`stock20`
+5. After login you are redirected to the appropriate dashboard:
+   - Manufacturer dashboard at `/mobile/admin`
+   - CFA dashboard at `/mobile/cfa`
+   - Stockist dashboard at `/mobile/stockist/<name>`
+   - Generic PWA entry point available at `/mobile` which forwards to the
+     correct dashboard based on the logged in user
 
 The database is automatically created on first run. You can reset it anytime by visiting `/init`.
 

@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for, session, jsonify
+from flask import Flask, render_template, request, redirect, url_for, session, jsonify, Response
 from flask import g
+import csv
+import io
 import sqlite3
 import os
 
@@ -7,14 +9,17 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'change-this-key'
 app.config['DATABASE'] = os.path.join(app.root_path, 'inventory.db')
 
-ADMIN_USERNAME = 'admin'
-ADMIN_PASSWORD = 'admin123'
+from passlib.hash import bcrypt
 
 
 def _init_db(db):
-    """Create database tables from schema.sql."""
+    """Create database tables and load sample data."""
     with open(os.path.join(app.root_path, 'schema.sql'), 'r') as f:
         db.executescript(f.read())
+    sample_path = os.path.join(app.root_path, 'sample_data.sql')
+    if os.path.exists(sample_path):
+        with open(sample_path, 'r') as sf:
+            db.executescript(sf.read())
     db.commit()
 
 
@@ -57,32 +62,14 @@ def init_route():
 def index():
     if 'username' not in session:
         return redirect(url_for('login'))
+    role = session.get('role')
+    if role == 'manufacturer':
+        return redirect(url_for('mobile_admin'))
+    elif role == 'cfa':
+        return redirect(url_for('mobile_cfa'))
+    elif role == 'stockist':
+        return redirect(url_for('mobile_stockist', name=session.get('username')))
     return render_template('index.html')
-
-
-@app.route('/mobile')
-def mobile():
-    return render_template('mobile.html')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
-    error = None
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
-            session['username'] = username
-            return redirect(url_for('inventory'))
-        else:
-            error = 'Invalid credentials'
-    return render_template('login.html', error=error)
-
-
-@app.route('/logout')
-def logout():
-    session.pop('username', None)
-    return redirect(url_for('login'))
 
 
 def login_required(fn):
@@ -93,6 +80,77 @@ def login_required(fn):
             return redirect(url_for('login'))
         return fn(*args, **kwargs)
     return wrapper
+
+
+@app.route('/mobile')
+@login_required
+def mobile_redirect():
+    role = session.get('role')
+    if role == 'manufacturer':
+        return redirect(url_for('mobile_admin'))
+    elif role == 'cfa':
+        return redirect(url_for('mobile_cfa'))
+    elif role == 'stockist':
+        return redirect(url_for('mobile_stockist', name=session.get('username')))
+    return 'Forbidden', 403
+
+
+
+
+@app.route('/mobile/admin')
+@login_required
+def mobile_admin():
+    if session.get('role') != 'manufacturer':
+        return 'Forbidden', 403
+    return render_template('mobile_admin.html')
+
+
+@app.route('/mobile/cfa')
+@login_required
+def mobile_cfa():
+    role = session.get('role')
+    if role not in ('manufacturer', 'cfa'):
+        return 'Forbidden', 403
+    return render_template('mobile_cfa.html')
+
+
+@app.route('/mobile/stockist/<name>')
+@login_required
+def mobile_stockist(name):
+    role = session.get('role')
+    if role == 'stockist' and name != session.get('username'):
+        return 'Forbidden', 403
+    return render_template('mobile_stockist.html', stockist=name)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        db = get_db()
+        cur = db.execute('SELECT password, role FROM users WHERE username=?', (username,))
+        row = cur.fetchone()
+        if row and bcrypt.verify(password, row['password']):
+            session['username'] = username
+            session['role'] = row['role']
+            if row['role'] == 'manufacturer':
+                return redirect(url_for('mobile_admin'))
+            elif row['role'] == 'cfa':
+                return redirect(url_for('mobile_cfa'))
+            elif row['role'] == 'stockist':
+                return redirect(url_for('mobile_stockist', name=username))
+            return redirect(url_for('inventory'))
+        error = 'Invalid credentials'
+    return render_template('login.html', error=error)
+
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
+    session.pop('role', None)
+    return redirect(url_for('login'))
 
 
 @app.route('/inventory')
@@ -225,6 +283,22 @@ def api_product(pid):
         db.execute("DELETE FROM products WHERE id=?", (pid,))
         db.commit()
         return jsonify({'deleted': True})
+
+
+@app.route('/export')
+@login_required
+def export_csv():
+    """Download all products as a CSV file."""
+    db = get_db()
+    cur = db.execute('SELECT * FROM products')
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow([d[0] for d in cur.description])
+    for row in cur.fetchall():
+        writer.writerow(row)
+    resp = Response(output.getvalue(), mimetype='text/csv')
+    resp.headers['Content-Disposition'] = 'attachment; filename=products.csv'
+    return resp
 
 
 if __name__ == '__main__':

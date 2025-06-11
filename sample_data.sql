@@ -14,8 +14,29 @@ INSERT INTO products (name, content, packing, category, quantity, price, expirat
 ('ZEKCLAV-DS', 'Amoxycillin, Pot. Clavulanate 28.5 mg', '30 ml syrup bottle (with sterile water for mixing)', 'Antibiotic', 0, 0.00, NULL),
 ('GLIMCUZ-M GP 1', 'Glimepiride 1 mg, Metformin 500 mg Prolonged Release', '10 x 10 tablets (Alu-Alu packing)', 'Anti-Diabetic', 0, 0.00, NULL),
 ('GLIMCUZ-M GP 2', 'Glimepiride 2 mg, Metformin 500 mg Prolonged Release', '10 x 10 tablets (Alu-Alu packing)', 'Anti-Diabetic', 0, 0.00, NULL),
-('ZEKMOL-650 Tablets', 'Paracetamol 650 mg', '10 x 10\'s', 'Analgesic and Antipyretic Tablets', 0, 0.00, NULL),
-('ZIFLOZIN Tablets', 'Dapagliflozin 10 mg', '10 x 10\'s', 'Anti-Diabetic Tablets', 0, 0.00, NULL);
+('ZEKMOL-650 Tablets', 'Paracetamol 650 mg', '10 x 10''s', 'Analgesic and Antipyretic Tablets', 0, 0.00, NULL),
+('ZIFLOZIN Tablets', 'Dapagliflozin 10 mg', '10 x 10''s', 'Anti-Diabetic Tablets', 0, 0.00, NULL);
 
-INSERT INTO users (username, password) VALUES
-('admin', '$2y$10$25PSEjYnmFbV9PveLuOwqu5NN7qthaDLTLsCTaArtPrZn3sKLBHQu');
+INSERT INTO users (username, password, role) VALUES
+('admin', '$2b$12$AoRAkNc/7b/eNXUAyCl.t.Su5SH6j.SpJwvFJ5rqqyFH5KiUhTLG6', 'manufacturer'),
+('cfa', '$2b$12$qBHSrV7yQVXXzZgIcSKDj.dS35K.wNxR2OiBetCx1YFYEiWn.cyWS', 'cfa'),
+('stockist1', '$2b$12$fgT3oXNEYrV9pfMx0sqqBe8wQWZ8Gky256pVCAWNoW7qtFylCxkXG', 'stockist'),
+('stockist2', '$2b$12$THeIZ5q/IN3mMsqT/ZfgT.J7AQiL/zCB/ayhmUobk0PugvEQ278la', 'stockist'),
+('stockist3', '$2b$12$kSGEM60kUQBSotg7hhhKWO.Yx/pCO3AeSilnXFoZRRDKXsS6rb7wq', 'stockist'),
+('stockist4', '$2b$12$KV7Kc3jMz0I9HcfiLgO9feb2dJ2Uv6/qvrB.4vcAPMPLvH7mtMucG', 'stockist'),
+('stockist5', '$2b$12$aVjCo.6AeErl0VPthRrtVuCBcNcVuBIMOYZ36hsxTAgk0fxg.cdAW', 'stockist'),
+('stockist6', '$2b$12$tY0yvianDzuALhlOfsBgueyETihqJFeVpNh9Gk/i31N.6qKzqjOCu', 'stockist'),
+('stockist7', '$2b$12$SKtZ.R.zeRUrWgLGTGVZser9iBnseiTZyoqyNoMafSjBCCXU0iRQi', 'stockist'),
+('stockist8', '$2b$12$BNZ2wwkw1GxLMrDM74sqbu5ytGAEthOtvsFhcI.WhNJOzEGpGCLxW', 'stockist'),
+('stockist9', '$2b$12$MZgYjqrFnXQJfmJYq0MH0OqLTcXhSwIFIuoIkPEmsQtQ7I/rudgV6', 'stockist'),
+('stockist10', '$2b$12$jxy5iqEDZGBguyuixRhg3.Dp/cJRMgZk9kLtFs4lJanncfihm8bMW', 'stockist'),
+('stockist11', '$2b$12$ttkfDgBvkt4LOfReeUwc9.RtlrTtd/oW5j5UQ82tMpzHUvSCpcX3u', 'stockist'),
+('stockist12', '$2b$12$rmWwOWd5W7G24G8KYpnHWOnIiOoJPdeGiqFRO7s58sVVZUTqBVBv2', 'stockist'),
+('stockist13', '$2b$12$XK6/GZ9UwUvlajvj.QdAUu0oSHIC9zcSO.f3vTkM90VzU6pUxr/gW', 'stockist'),
+('stockist14', '$2b$12$dwYAcDGEgGh4qJvJZz5rOeQLYPgS4aJSRtbdfmbdIH4G8eDQQy33K', 'stockist'),
+('stockist15', '$2b$12$IrXdCVAST6QJ7lpD2P5yguSyRH/jxZJnKek1F23Hc6CfBc7FtctDm', 'stockist'),
+('stockist16', '$2b$12$w3eitsw55Hij4VYwtV/QiuA.XGJUn7iQzeeEnvvEZFeq2lpR.CLF2', 'stockist'),
+('stockist17', '$2b$12$sXtUIHSq2sdpd9LAOeKZkuEuq4ngSc4GwGNr0Ng/cXcQSVf0AdrLG', 'stockist'),
+('stockist18', '$2b$12$vnYM7fhZDn5sDrbiBbnpxuS4h03JMHDzi2mBebAPIWLlVg4Ni0pCS', 'stockist'),
+('stockist19', '$2b$12$UkCL0I06pIaZnom50OO./OQWVITWp09qciCyCl/K1ctrbm9HFwi.S', 'stockist'),
+('stockist20', '$2b$12$Hedkfn4FgXmwOTJV0kAKeu1.wEu3CyS1qiqIfkUT9Vd9CpgUWXKu6', 'stockist');
