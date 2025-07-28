@@ -1,8 +1,11 @@
 import os
+import sys
 import tempfile
 import json
 import sqlite3
 import unittest
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from app import app, _init_db
 
